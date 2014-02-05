@@ -1,6 +1,3 @@
-require 'uri'
-require 'net/https'
-
 class Page
   attr_accessor :children_pages, :static_assets, :parent_page, :url, :title, :depth
   def initialize(url, parent, title, depth, assets)

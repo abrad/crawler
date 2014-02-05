@@ -4,9 +4,8 @@ require './page.rb'
 
 class Sitemap
 	def initialize(input_url, print_assets)
-		# @root_page = Page.new(input_url, nil)
-		# @root_page.open
 		@pages = []
+		@asset_print = print_assets == "true" ? true : false
 
 		Anemone.crawl(input_url) do |anemone|
   			titles = []
@@ -23,11 +22,9 @@ class Sitemap
 	  				else
 	  					@pages << new_page
 	  				end
-	  				# puts new_page.title
-	  				# titles.push page.doc.at('title').inner_html rescue nil 
 	  			end
   			end
-  			anemone.after_crawl { @pages.map {|p| puts p.print("", print_assets) } }
+  			anemone.after_crawl { @pages.map {|p| puts p.print("", @asset_print) } }
 		end
 	end 
 
