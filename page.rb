@@ -12,9 +12,13 @@ class Page
     @depth          = depth
   end
 
-  def print(input)
-    puts "#{input}#{url}"
-    children_pages.map{|p| p.print("#{input}----")}
+  def print(input, print_assets)
+    puts "#{input} #{depth}: #{url}"
+    if print_assets && @static_assets.length > 0
+      puts "#{input}-------- ASSETS:"
+      @static_assets.map{|a| puts "#{input}--------        #{a}"}
+    end
+    children_pages.map{|p| p.print("#{input}----", print_assets)}
   end
 
   def find_child(url)

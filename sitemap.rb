@@ -3,7 +3,7 @@ require 'debugger'
 require './page.rb'
 
 class Sitemap
-	def initialize(input_url)
+	def initialize(input_url, print_assets)
 		# @root_page = Page.new(input_url, nil)
 		# @root_page.open
 		@pages = []
@@ -27,7 +27,7 @@ class Sitemap
 	  				# titles.push page.doc.at('title').inner_html rescue nil 
 	  			end
   			end
-  			anemone.after_crawl { @pages.map {|p| puts p.print("") } }
+  			anemone.after_crawl { @pages.map {|p| puts p.print("", print_assets) } }
 		end
 	end 
 
@@ -40,4 +40,4 @@ class Sitemap
 	end
 end
 
-sitemap = Sitemap.new(ARGV[0])
+sitemap = Sitemap.new(ARGV[0], ARGV[1])
